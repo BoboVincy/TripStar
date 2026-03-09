@@ -84,8 +84,11 @@
     "loading": {
       "initializing": "初期化中...",
       "searchingAttractions": "観光地を検索中...",
+      "searchedAttractions": "観光地の検索完了",
       "queryingWeather": "天気を確認中...",
+      "queriedWeather": "天気の確認完了",
       "recommendingHotels": "ホテルを推薦中...",
+      "recommendedHotels": "ホテルの推薦完了",
       "generatingPlan": "旅程を生成中...",
       "planCode": "プラン番号 {code}",
       "preparing": "少々お待ちください。準備中です...",

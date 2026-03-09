@@ -84,9 +84,12 @@
     "loading": {
       "initializing": "正在初始化...",
       "searchingAttractions": "正在搜索景点...",
+      "searchedAttractions": "景点搜索完毕",
       "queryingWeather": "正在查询天气...",
+      "queriedWeather": "天气查询完毕",
       "recommendingHotels": "正在推荐酒店...",
-      "generatingPlan": "正在生成行程计划...",
+      "recommendedHotels": "酒店推荐完毕",
+      "generatingPlan": "正在生成行程...",
       "planCode": "计划编号 {code}",
       "preparing": "请稍等，正在为您准备...",
       "workingTogether": "AI 正在齐心协力为您定制旅程...",

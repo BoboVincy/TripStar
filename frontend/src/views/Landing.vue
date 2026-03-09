@@ -224,7 +224,7 @@
                 <i v-if="loadingProgress >= 0 && loadingProgress <= 30" class="spinner-small"></i>
                 <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
               </div>
-              <p class="node-text">{{ t('home.loading.searchingAttractions') }}</p>
+              <p class="node-text">{{ loadingProgress > 30 ? t('home.loading.searchedAttractions') : t('home.loading.searchingAttractions') }}</p>
             </div>
             <div class="step-divider" :class="{ completed: loadingProgress > 30 }"></div>
 
@@ -232,9 +232,11 @@
             <div class="step-node" :class="{ active: loadingProgress > 30 && loadingProgress <= 50, completed: loadingProgress > 50 }">
               <div class="node-icon">
                 <i v-if="loadingProgress > 30 && loadingProgress <= 50" class="spinner-small"></i>
-                <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a5.5 5.5 0 0 0-11-1.5A5 5 0 0 0 8 8a9 9 0 0 1 15 3.5 5 5 0 0 0-5.5 7.5z"></path></svg>
+                <svg v-else width="20px" height="20px" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.5 1.5V3.1M3.6 10H2M5.4512 4.95137L4.31982 3.82M15.5498 4.95137L16.6812 3.82M19 10H17.4M6.50007 10.0001C6.50007 7.79093 8.29093 6.00007 10.5001 6.00007C12.0061 6.00007 13.3177 6.83235 14.0001 8.06206M6 22C3.79086 22 2 20.2091 2 18C2 15.7909 3.79086 14 6 14C6.46419 14 6.90991 14.0791 7.32442 14.2245C8.04061 12.3396 9.86387 11 12 11C14.1361 11 15.9594 12.3396 16.6756 14.2245C17.0901 14.0791 17.5358 14 18 14C20.2091 14 22 15.7909 22 18C22 20.2091 20.2091 22 18 22C13.3597 22 9.87921 22 6 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </div>
-              <p class="node-text">{{ t('home.loading.queryingWeather') }}</p>
+              <p class="node-text">{{ loadingProgress > 50 ? t('home.loading.queriedWeather') : t('home.loading.queryingWeather') }}</p>
             </div>
             <div class="step-divider" :class="{ completed: loadingProgress > 50 }"></div>
 
@@ -242,9 +244,12 @@
             <div class="step-node" :class="{ active: loadingProgress > 50 && loadingProgress <= 70, completed: loadingProgress > 70 }">
               <div class="node-icon">
                 <i v-if="loadingProgress > 50 && loadingProgress <= 70" class="spinner-small"></i>
-                <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <svg v-else fill="currentColor" width="25px" height="25px" viewBox="0 0 24 24" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Layer_Grid"/><g id="Layer_2">
+                    <path d="M21,8c0-2.2-1.8-4-4-4H7C4.8,4,3,5.8,3,8v3.8c-0.6,0.5-1,1.3-1,2.2v2.7V17v2c0,0.6,0.4,1,1,1s1-0.4,1-1v-1h16v1   c0,0.6,0.4,1,1,1s1-0.4,1-1v-2v-0.3V14c0-0.9-0.4-1.7-1-2.2V8z M5,8c0-1.1,0.9-2,2-2h10c1.1,0,2,0.9,2,2v3h-1v-1c0-1.7-1.3-3-3-3   h-1c-0.8,0-1.5,0.3-2,0.8C11.5,7.3,10.8,7,10,7H9c-1.7,0-3,1.3-3,3v1H5V8z M16,10v1h-3v-1c0-0.6,0.4-1,1-1h1C15.6,9,16,9.4,16,10z    M11,10v1H8v-1c0-0.6,0.4-1,1-1h1C10.6,9,11,9.4,11,10z M20,16H4v-2c0-0.6,0.4-1,1-1h3h3h2h3h3c0.6,0,1,0.4,1,1V16z"/></g>
+                </svg>
               </div>
-              <p class="node-text">{{ t('home.loading.recommendingHotels') }}</p>
+              <p class="node-text">{{ loadingProgress > 70 ? t('home.loading.recommendedHotels') : t('home.loading.recommendingHotels') }}</p>
             </div>
             <div class="step-divider" :class="{ completed: loadingProgress > 70 }"></div>
 
@@ -254,7 +259,7 @@
                 <i v-if="loadingProgress > 70 && loadingProgress < 100" class="spinner-small"></i>
                 <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
               </div>
-              <p class="node-text">{{ t('home.loading.generatingPlan') }}</p>
+              <p class="node-text">{{ loadingProgress >= 100 ? t('home.loading.done') : t('home.loading.generatingPlan') }}</p>
             </div>
           </div>
           
@@ -430,7 +435,7 @@ const handleSubmit = async () => {
       else if (loadingProgress.value <= 70) loadingStatus.value = t('home.loading.recommendingHotels')
       else loadingStatus.value = t('home.loading.generatingPlan')
     }
-  }, 500)
+  }, 1000)
 
   try {
     const requestData: TripFormData = {
@@ -974,11 +979,29 @@ const handleSubmit = async () => {
   justify-content: center;
   cursor: pointer;
   user-select: none;
+  transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.interest-pill:hover {
+  background: rgba(236, 243, 250, 0.08);
+  border-color: rgba(236, 243, 250, 0.3);
+  /* transform: translateY(-2px); */
+  box-shadow: 0 4px 12px rgba(4, 11, 18, 0.3);
+}
+
+.interest-pill:active {
+  transform: translateY(1px) scale(0.96);
+  box-shadow: 0 2px 4px rgba(4, 11, 18, 0.2);
 }
 
 .interest-pill.active {
   border-color: rgba(215, 110, 66, 0.8);
   background: rgba(215, 110, 66, 0.2);
+}
+
+.interest-pill.active:hover {
+  background: rgba(215, 110, 66, 0.28);
+  border-color: rgba(215, 110, 66, 1);
 }
 
 .submit-btn {

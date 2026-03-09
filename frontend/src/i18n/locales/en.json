@@ -84,8 +84,11 @@
     "loading": {
       "initializing": "Initializing...",
       "searchingAttractions": "Searching attractions...",
+      "searchedAttractions": "Attractions found",
       "queryingWeather": "Checking weather...",
+      "queriedWeather": "Weather checked",
       "recommendingHotels": "Recommending hotels...",
+      "recommendedHotels": "Hotels recommended",
       "generatingPlan": "Generating itinerary...",
       "planCode": "PLAN CODE {code}",
       "preparing": "Please wait, we are preparing for you...",
