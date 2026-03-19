@@ -249,7 +249,7 @@ class MultiAgentTripPlanner:
             print(f"{'='*60}\n")
 
             # ========== 串行阶段: 步骤1-3 依次执行 ==========
-            print("⏳ 依次执行步骤1-3: 搜索景点 -> 查询天气 -> 搜索酒店 (避免并发导致的MCP子进程冲突)...")
+            print("⏳ 依次执行步骤1-3: 搜索景点 -> 查询天气 -> 搜索酒店...")
 
             # 构建各Agent的查询
             attraction_query = self._build_attraction_query(request)

@@ -55,18 +55,22 @@ class UnsplashService:
             print(f"❌ Unsplash搜索失败: {str(e)}")
             return []
     
-    def get_photo_url(self, query: str) -> Optional[str]:
+    def get_photo_url(self, query: str, randomize: bool = False) -> Optional[str]:
         """
         获取单张图片URL
 
         Args:
             query: 搜索关键词
+            randomize: 是否从前10条结果中随机挑选
 
         Returns:
             图片URL
         """
-        photos = self.search_photos(query, per_page=1)
+        import random
+        photos = self.search_photos(query, per_page=10 if randomize else 1)
         if photos:
+            if randomize:
+                return random.choice(photos).get("url")
             return photos[0].get("url")
         return None
 

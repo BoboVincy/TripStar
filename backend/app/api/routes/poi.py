@@ -127,11 +127,11 @@ async def get_attraction_photo(name: str, city: Optional[str] = None):
                 city_pinyin = "".join([p[0] for p in city_pinyin_list])
             
             query_city = f"{city_pinyin} China landmark"
-            photo_url = unsplash_service.get_photo_url(query_city)
+            photo_url = unsplash_service.get_photo_url(query_city, randomize=True)
             
         if not photo_url:
             # 尝试 3: 最泛的兜底，保证一定有图
-            photo_url = unsplash_service.get_photo_url("beautiful ancient architecture China")
+            photo_url = unsplash_service.get_photo_url("beautiful ancient architecture China", randomize=True)
 
         return {
             "success": True,

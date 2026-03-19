@@ -19,10 +19,8 @@ LLM_BASE_URL = os.getenv("LLM_BASE_URL", "https://api.openai.com/v1")
 LLM_MODEL_ID = os.getenv("LLM_MODEL_ID", "gpt-4")
 LLM_TIMEOUT = int(os.getenv("LLM_TIMEOUT", "120"))
 
-# 确保 base_url 结尾没有多余的斜杠，并自动补全 /v1 后缀以兼容标准 OpenAI 接口格式
+# 确保 base_url 结尾没有多余的斜杠
 LLM_BASE_URL = LLM_BASE_URL.rstrip("/")
-if not LLM_BASE_URL.endswith("/v1"):
-    LLM_BASE_URL = f"{LLM_BASE_URL}/v1"
 
 # ============ System Prompt ============
 SYSTEM_PROMPT = """你是一个专业且贴心的私人旅行管家「旅途星辰AI」。
