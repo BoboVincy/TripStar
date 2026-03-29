@@ -113,7 +113,7 @@ async def get_attraction_photo(name: str, city: Optional[str] = None):
         
         # 尝试 1: 景点拼音 + China
         query_attraction = f"{pinyin_name} China"
-        photo_url = unsplash_service.get_photo_url(query_attraction)
+        photo_url = await unsplash_service.get_photo_url(query_attraction)
 
         if not photo_url:
             # 尝试 2: 如果有城市参数，使用真实的城市拼音做兜底
@@ -127,11 +127,11 @@ async def get_attraction_photo(name: str, city: Optional[str] = None):
                 city_pinyin = "".join([p[0] for p in city_pinyin_list])
             
             query_city = f"{city_pinyin} China landmark"
-            photo_url = unsplash_service.get_photo_url(query_city, randomize=True)
+            photo_url = await unsplash_service.get_photo_url(query_city, randomize=True)
             
         if not photo_url:
             # 尝试 3: 最泛的兜底，保证一定有图
-            photo_url = unsplash_service.get_photo_url("beautiful ancient architecture China", randomize=True)
+            photo_url = await unsplash_service.get_photo_url("beautiful ancient architecture China", randomize=True)
 
         return {
             "success": True,
@@ -148,4 +148,3 @@ async def get_attraction_photo(name: str, city: Optional[str] = None):
             status_code=500,
             detail=f"获取景点图片失败: {str(e)}"
         )
-
