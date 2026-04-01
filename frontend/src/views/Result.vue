@@ -256,7 +256,7 @@
             >
               <template #header>
                 <div class="day-header">
-                  <span class="day-title">{{ t('common.dayNumber', { day: day.day_index + 1 }) }}</span>
+                  <span class="day-title">{{ t('common.dayNumber', { day: index + 1 }) }}</span>
                   <span class="day-date">{{ day.date }}</span>
                 </div>
               </template>
@@ -316,7 +316,7 @@
                       <!-- 景点图片 -->
                       <div class="attraction-image-wrapper">
                         <img
-                          :src="getAttractionImage(item.name, index)"
+                          :src="item.image_url || getAttractionImage(item.name, index)"
                           :alt="item.name"
                           class="attraction-image"
                           @error="handleImageError"
@@ -347,6 +347,11 @@
                         <p><strong>{{ t('result.fieldVisitDuration') }}:</strong> {{ item.visit_duration }}{{ t('result.minuteUnit') }}</p>
                         <p><strong>{{ t('result.fieldDescription') }}:</strong> {{ item.description }}</p>
                         <p v-if="item.rating"><strong>{{ t('result.fieldRating') }}:</strong> {{ item.rating }}</p>
+                        <!-- 预约提醒 -->
+                        <div v-if="item.reservation_required" class="reservation-alert">
+                          <span class="reservation-badge">📋 需提前预约</span>
+                          <span v-if="item.reservation_tips" class="reservation-tips">{{ item.reservation_tips }}</span>
+                        </div>
                       </div>
                     </a-card>
                   </a-list-item>
@@ -798,10 +803,7 @@ const overviewAttractions = computed<OverviewAttractionItem[]>(() => {
 
   const items: OverviewAttractionItem[] = []
   tripPlan.value.days.forEach((day, dayArrayIndex) => {
-    const dayNumber =
-      typeof day.day_index === 'number' && Number.isFinite(day.day_index)
-        ? day.day_index + 1
-        : dayArrayIndex + 1
+    const dayNumber = dayArrayIndex + 1
 
     day.attractions.forEach((attraction, order) => {
       items.push({
@@ -1363,7 +1365,7 @@ const budgetItems = computed<BudgetDetailItem[]>(() => {
   const items: BudgetDetailItem[] = []
 
   tripPlan.value.days.forEach((day, dayIndex) => {
-    const dayNumber = day.day_index + 1
+    const dayNumber = dayIndex + 1
 
     day.attractions.forEach((attraction, attractionIndex) => {
       const amount = roundBudgetAmount(toBudgetNumber(attraction.ticket_price))
@@ -1762,10 +1764,10 @@ const buildExportHTML = (): string => {
 
   // 每日行程 HTML
   let daysHTML = ''
-  tp.days.forEach((day) => {
+  tp.days.forEach((day, index) => {
     let attractionsHTML = ''
     day.attractions.forEach((a, ai) => {
-      const photoUrl = attractionPhotos.value[a.name] || ''
+      const photoUrl = a.image_url || attractionPhotos.value[a.name] || ''
       const durationText = t('result.export.durationLine', { duration: a.visit_duration || '—' })
       const imgTag = photoUrl
         ? `<img src="${photoUrl}" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:8px;" crossorigin="anonymous" />`
@@ -1792,7 +1794,7 @@ const buildExportHTML = (): string => {
 
     daysHTML += `
       <div style="background:#ffffff;border-radius:14px;padding:20px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,0.06);">
-        <h3 style="margin:0 0 14px;color:#667eea;font-size:18px;">${t('result.export.dayTitle', { day: day.day_index + 1 })} <span style="font-size:14px;color:#888;margin-left:8px;">${day.date || ''}</span></h3>
+        <h3 style="margin:0 0 14px;color:#667eea;font-size:18px;">${t('result.export.dayTitle', { day: index + 1 })} <span style="font-size:14px;color:#888;margin-left:8px;">${day.date || ''}</span></h3>
         <div style="display:flex;flex-wrap:wrap;gap:12px;">
           ${attractionsHTML}
         </div>
@@ -2737,6 +2739,30 @@ const drawRoutes = async (AMap: any, attractions: any[]): Promise<any[]> => {
   backdrop-filter: blur(10px);
 }
 
+/* 预约提醒样式 */
+.reservation-alert {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.12) 0%, rgba(255, 87, 34, 0.08) 100%);
+  border: 1px solid rgba(255, 152, 0, 0.35);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reservation-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff9800;
+}
+
+.reservation-tips {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+}
+
 /* 天气看板样式 */
 .weather-section-card {
   /* margin-top: 14px; */
@@ -2770,8 +2796,7 @@ const drawRoutes = async (AMap: any, attractions: any[]): Promise<any[]> => {
 .weather-gradient {
   position: absolute;
   inset: 0;
-  background-image: url("https://images.unsplash.com/photo-1559963110-71b394e7494d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80");
-  /* background-image: var(--weather-gradient, linear-gradient(140deg, #72edf2 0%, #5151e5 100%)); */
+  background-image: linear-gradient(140deg, #72edf2 0%, #5151e5 100%);
   opacity: 0.84;
 }
 
