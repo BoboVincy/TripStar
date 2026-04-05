@@ -2,13 +2,6 @@
 
 cd /app
 
-# 导出环境变量（如果 .env 存在就加载）
-if [ -f backend/.env ]; then
-  set -a
-  source backend/.env
-  set +a
-fi
-
 # 获取服务端口和地址，默认为 0.0.0.0:7860
 BIND_HOST=${HOST:-0.0.0.0}
 BIND_PORT=${PORT:-7860}
