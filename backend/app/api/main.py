@@ -53,7 +53,7 @@ async def startup_event():
         print("\n✅ 配置验证通过")
     except ValueError as e:
         print(f"\n❌ 配置验证失败:\n{e}")
-        print("\n请检查.env文件并确保所有必要的配置项都已设置")
+        print("\n请检查环境变量配置；本地开发可通过 .env 提供，Docker 部署请通过容器环境变量提供")
         raise
     
     print("\n" + "="*60)
